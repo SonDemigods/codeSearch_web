@@ -106,7 +106,7 @@ export default {
 <style lang="scss">
 .header {
   // background: #2d8cf0;
-  background: #ffffff;
+  background: #ffffff !important;
 }
 .content {
   height: calc(100vh - 150px);
