@@ -7,6 +7,8 @@
       </Header>
       <Content class="content">
         <eList :list="list"></eList>
+        <eSpin v-if="loading"
+               :current="70"></eSpin>
       </Content>
       <Footer class="footer">
         <ePage :current="current"
@@ -24,6 +26,8 @@
 // 接口 获取番号列表
 import { getList } from '../../api/data'
 
+// 加载动画
+import eSpin from '../e-spin'
 // 菜单
 import eMenu from '../e-menu'
 // 搜索条
@@ -35,6 +39,7 @@ import ePage from '../e-page'
 export default {
   name: 'home',
   components: {
+    eSpin,
     eMenu,
     eSearch,
     eList,
@@ -43,6 +48,8 @@ export default {
   props: {},
   data () {
     return {
+      // 加载动画
+      loading: false,
       // 当前页数
       current: 1,
       // 总条数
@@ -84,6 +91,7 @@ export default {
       this.listReload()
     },
     listReload () {
+      this.loading = true
       getList(this.current, this.pageSize, this.keyword).then(res => {
         console.log(res)
         if (res.status === 200) {
@@ -94,6 +102,7 @@ export default {
         } else {
           this.$Message.error('查询失败！')
         }
+        // this.loading = false
       })
     }
   },
@@ -112,6 +121,7 @@ export default {
   height: calc(100vh - 150px);
   overflow-x: hidden;
   overflow-y: auto;
+  position: relative;
 }
 .footer {
   height: 80px;
