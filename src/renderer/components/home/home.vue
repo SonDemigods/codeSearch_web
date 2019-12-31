@@ -78,17 +78,7 @@ export default {
       // 查询关键词
       keyword: '',
       // 数据列表
-      list: [
-        { id: 1, title: 'ipx-177', pic: 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAAkCAYAAABIdFAMAAAAGXRFW', type: 1 },
-        { id: 2, title: 'ipx-177', pic: 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAAkCAYAAABIdFAMAAAAGXRFW', type: 1 },
-        { id: 3, title: 'ipx-177', pic: 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAAkCAYAAABIdFAMAAAAGXRFW', type: 1 },
-        { id: 4, title: 'ipx-177', pic: 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAAkCAYAAABIdFAMAAAAGXRFW', type: 1 },
-        { id: 5, title: 'ipx-177', pic: 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAAkCAYAAABIdFAMAAAAGXRFW', type: 1 },
-        { id: 6, title: 'ipx-177', pic: 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAAkCAYAAABIdFAMAAAAGXRFW', type: 1 },
-        { id: 7, title: 'ipx-177', pic: 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAAkCAYAAABIdFAMAAAAGXRFW', type: 0 },
-        { id: 8, title: 'ipx-177', pic: 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAAkCAYAAABIdFAMAAAAGXRFW', type: 0 },
-        { id: 9, title: 'ipx-177', pic: 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAAkCAYAAABIdFAMAAAAGXRFW', type: 0 }
-      ],
+      list: [],
       formShow: false,
       formId: null,
       formLoading: true
