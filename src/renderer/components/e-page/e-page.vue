@@ -43,9 +43,11 @@ export default {
   watch: {},
   computed: {},
   methods: {
+    // 当前页变更
     changePage (page) {
       this.$emit('on-change', page)
     },
+    // 分页条数变更
     changePageSize (pageSize) {
       this.$emit('on-page-size-change', pageSize)
     }

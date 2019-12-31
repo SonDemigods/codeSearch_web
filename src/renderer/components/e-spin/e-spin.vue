@@ -50,7 +50,6 @@ export default {
     },
     topNumber () {
       let current = 100 - parseFloat(this.current)
-      console.log(current)
       return current.toFixed(2)
     }
   },

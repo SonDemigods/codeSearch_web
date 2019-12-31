@@ -21,6 +21,7 @@ export default {
   watch: {},
   computed: {},
   methods: {
+    // 搜索事件
     searchHandle (value) {
       this.$emit('on-search', value)
     }
