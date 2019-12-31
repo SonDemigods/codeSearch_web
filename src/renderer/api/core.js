@@ -2,6 +2,7 @@ import {
   Message
 } from 'view-design'
 import axios from 'axios'
+import qs from 'qs'
 
 class HttpRequest {
   constructor (baseUrl = 'http:127.0.0.1:8080') {
@@ -120,8 +121,6 @@ class HttpRequest {
     return instance(options)
   }
   get (url) {
-    console.log(url)
-
     const config = {
       url,
       method: 'get'
@@ -129,25 +128,34 @@ class HttpRequest {
     return this.request(config)
   }
   post (url, data) {
+    const _data = qs.stringify(data, {
+      arrayFormat: 'repeat'
+    })
     const config = {
       url,
-      data,
+      data: _data,
       method: 'post'
     }
     return this.request(config)
   }
   put (url, data) {
+    const _data = qs.stringify(data, {
+      arrayFormat: 'repeat'
+    })
     const config = {
       url,
-      data,
+      data: _data,
       method: 'put'
     }
     return this.request(config)
   }
   delete (url, data) {
+    const _data = qs.stringify(data, {
+      arrayFormat: 'repeat'
+    })
     const config = {
       url,
-      data,
+      data: _data,
       method: 'delete'
     }
     return this.request(config)
