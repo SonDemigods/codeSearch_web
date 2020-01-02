@@ -9,8 +9,10 @@
     <Card v-for="item in list"
           :key="item.id"
           :icon="item.type === 1 ? 'md-grid' : 'md-videocam'"
-          :title="item.title"
           class="item">
+      <div slot="title"
+           class="title"
+           @click="titleHandle(item.title)">{{item.title}}</div>
       <div slot="extra"
            class="operation">
         <Button type="text"
@@ -29,8 +31,19 @@
       <div>
         <img :src="$picUrl + item.pic"
              :alt="item.title"
+             @click="picShowHandle(item.pic)"
              class="pic" />
       </div>
+      <Modal v-model="picShow"
+             title='预览'
+             :width="900"
+             :mask-closable="false"
+             footer-hide>
+        <img v-if="picShow"
+             :src="$picUrl + currentPic"
+             :alt="currentPic"
+             class="picView" />
+      </Modal>
     </Card>
   </div>
 </template>
@@ -49,6 +62,8 @@ export default {
   },
   data () {
     return {
+      picShow: false,
+      currentPic: ''
     }
   },
   watch: {},
@@ -58,20 +73,29 @@ export default {
     createHandle () {
       this.$emit('on-create')
     },
-    // 删除事件
-    deleteHandle (id) {
-      this.$emit('on-delete', id)
+    // 点击标题事件
+    titleHandle (keyword) {
+      this.$emit('on-title', keyword)
     },
     // 编辑事件
     editHandle (id) {
       this.$emit('on-edit', id)
+    },
+    // 删除事件
+    deleteHandle (id) {
+      this.$emit('on-delete', id)
+    },
+    // 预览图片
+    picShowHandle (url) {
+      this.currentPic = url
+      this.picShow = true
     }
   },
   created () { },
   mounted () { }
 }
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 .list-box {
   display: flex;
   justify-content: center;
@@ -83,6 +107,14 @@ export default {
     min-width: 300px;
     max-width: 400px;
     margin: 10px;
+    .title {
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      &:hover {
+        color: #2d8cf0;
+      }
+    }
     .operation {
       display: none;
       height: 20px;
@@ -116,7 +148,13 @@ export default {
       display: block;
       width: 100%;
       min-height: 100%;
+      cursor: pointer;
     }
   }
+}
+.picView {
+  display: block;
+  width: 100%;
+  min-height: 100%;
 }
 </style>
