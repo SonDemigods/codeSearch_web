@@ -12,14 +12,14 @@
       <FormItem label="类型"
                 prop="type">
         <Select v-model="formData.type"
-                placeholder="请选择代码">
+                placeholder="请选择类型">
           <Option v-for="item in typeList"
                   :value="item.value"
                   :key="item.value">{{ item.label }}</Option>
         </Select>
       </FormItem>
       <FormItem label="图片"
-                prop="type">
+                prop="pic">
         <Input v-model="formData.pic"
                readonly
                class="picInput"
@@ -62,8 +62,17 @@ export default {
       typeList,
       formData: empty,
       formValidate: {
+        // 标题验证
         title: [
           { required: true, message: '代码不能为空！', trigger: 'blur' }
+        ],
+        // 类型验证
+        type: [
+          { required: true, type: 'number', message: '请选择类型！', trigger: 'change' }
+        ],
+        // 图片验证
+        pic: [
+          { required: true, message: '请上传图片！', trigger: 'change' }
         ]
       },
       headers: {}
@@ -99,18 +108,39 @@ export default {
         }
       })
     },
+    // 校验
+    formVerification () {
+      console.log(this.formData)
+
+      const that = this
+      return new Promise((resolve, reject) => {
+        that.$refs.formData.validate((valid) => {
+          if (valid) {
+            resolve(valid)
+          } else {
+            this.$Message.error('请检查表单信息！')
+            this.saveFormRes(valid)
+            reject(valid)
+          }
+        })
+      })
+    },
     // 新增
     createFormData () {
-      createInfo(this.formData).then(res => {
-        const type = res.status === 201
-        this.saveFormRes(type)
+      this.formVerification().then(type => {
+        createInfo(this.formData).then(res => {
+          const type = res.status === 201
+          this.saveFormRes(type)
+        })
       })
     },
     // 更新
     updateFormData () {
-      updateInfo(this.formData).then(res => {
-        const type = res.status === 200
-        this.saveFormRes(type)
+      this.formVerification().then(type => {
+        updateInfo(this.formData).then(res => {
+          const type = res.status === 200
+          this.saveFormRes(type)
+        })
       })
     },
     // 保存结果
@@ -119,7 +149,6 @@ export default {
     },
     // 上传成功
     uploadSuccess (response, file, fileList) {
-      console.log(response)
       this.formData.pic = response.pic
     },
     // 文件格式验证
