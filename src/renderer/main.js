@@ -22,6 +22,9 @@ Vue.baseUrl = Vue.prototype.$baseUrl = config.baseUrl
 // 全局图片地址
 Vue.picUrl = Vue.prototype.$picUrl = config.baseUrl + config.picUrl
 
+// 查询番号地址
+Vue.searchUrl = Vue.prototype.$searchUrl = config.searchUrl
+
 /* eslint-disable no-new */
 new Vue({
   components: { App },

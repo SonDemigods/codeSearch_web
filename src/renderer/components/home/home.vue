@@ -8,6 +8,7 @@
       <Content class="content">
         <eList :list="list"
                @on-create="createHandle"
+               @on-title="titleHandle"
                @on-edit="editHandle"
                @on-delete="deleteHandle"></eList>
         <eSpin v-if="spinLoading"
@@ -39,6 +40,8 @@
 </template>
 
 <script>
+// 调用命令行
+import { shell } from 'electron'
 // 接口 获取番号列表, 删除番号信息
 import { getInfoList, deleteInfo } from '../../api/data'
 
@@ -125,6 +128,10 @@ export default {
     createHandle () {
       this.formId = null
       this.formShow = true
+    },
+    // 点击标题事件
+    titleHandle (keyword) {
+      shell.openExternal(this.$searchUrl + keyword)
     },
     // 编辑事件
     editHandle (id) {
