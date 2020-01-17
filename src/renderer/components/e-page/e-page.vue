@@ -6,6 +6,7 @@
           :page-size-opts="pageSizeOpts"
           show-elevator
           show-sizer
+          show-total
           @on-change="changePage"
           @on-page-size-change="changePageSize" />
   </div>
